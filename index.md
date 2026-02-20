@@ -1,3 +1,3 @@
 **Welcome to my website!**
 
-[Blogs](./blogs/)
+[Blogs](./blogs/index.md)
