@@ -2,4 +2,4 @@
 
 [Blogs](./blogs/index.md)
 
-[Links](https://link.jihoo125.com/links.html)
+[Links](https://link.jihoo125.com/links.md)
