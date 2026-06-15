@@ -41,7 +41,7 @@
     a {
       text-decoration: none;
       color: #ffffff;
-      background: #2563eb;
+      background: #;
       padding: 10px 18px;
       border-radius: 8px;
       font-weight: 600;
@@ -52,6 +52,19 @@
       background: #1e4fd1;
       transform: translateY(-1px);
     }
+
+    .blkrb {
+  animation: blkrb 1s infinite;
+}
+
+@keyframes blkrb {
+  0%, 100% {
+    color: red;
+  }
+  50% {
+    color: #2563eb;
+  }
+}
   </style>
 </head>
 <body>
@@ -72,7 +85,7 @@
 
     <div class="links">
       <a href="./blogs/index.html">Blogs</a>
-     
+      <a href="gameitall.pe.kr" class="blkrb">Games</a>
     </div>
   </div>
 </body>
