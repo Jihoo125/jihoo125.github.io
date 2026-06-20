@@ -54,14 +54,14 @@ h1 {
 }
 
 .blkrb {
-  animation: blkrb 1s infinite;
+  animation: blkrb 1s step(1) infinite;
 }
 
 @keyframes blkrb {
-  0% {
+  0% ,100%{
     color: red;
   }
-  100% {
+  50% {
     color: #ffffff;
   }
 }
