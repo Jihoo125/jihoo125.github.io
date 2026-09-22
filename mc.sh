@@ -6,7 +6,64 @@ set -e
 # Minecraft 1.21.11 Vanilla
 # Blocked in Combat | Remastered v1.0.2
 # Ubuntu EC2 t3.medium
-# ZERO INTERACTION
+# ZERO INTERACTION```bash
+#!/bin/bash
+
+set -e
+
+DIR="/opt/minecraft"
+JAR="$DIR/server.jar"
+MAP="/tmp/map.zip"
+
+apt update -y
+apt install -y openjdk-21-jre-headless curl unzip screen
+
+mkdir -p "$DIR"
+
+curl -L \
+  "https://piston-data.mojang.com/v1/objects/64bb6d763bed0a9f1d632ec347938594144943ed/server.jar" \
+  -o "$JAR"
+
+curl -L \
+  "https://www.curseforge.com/minecraft/worlds/blocked-in-combat-remastered/download/7695831" \
+  -o "$MAP"
+
+rm -rf /tmp/map
+mkdir /tmp/map
+unzip -q "$MAP" -d /tmp/map
+
+WORLD=$(find /tmp/map -type f -name level.dat -printf '%h\n' | head -n 1)
+
+rm -rf "$DIR/world"
+cp -r "$WORLD" "$DIR/world"
+
+cat > "$DIR/eula.txt" <<EOF
+eula=true
+EOF
+
+cat > "$DIR/server.properties" <<EOF
+level-name=world
+server-port=25565
+gamemode=adventure
+difficulty=normal
+max-players=8
+view-distance=8
+simulation-distance=6
+spawn-protection=0
+online-mode=true
+motd=Blocked in Combat | Remastered
+EOF
+
+screen -S minecraft -dm bash -c \
+  "cd $DIR && java -Xms2G -Xmx3G -jar server.jar nogui"
+
+echo
+echo "Minecraft server started."
+echo "Connect: YOUR_EC2_IP:25565"
+echo
+echo "Console: screen -r minecraft"
+```
+
 # ============================================================
 
 MC_DIR="/opt/minecraft"
